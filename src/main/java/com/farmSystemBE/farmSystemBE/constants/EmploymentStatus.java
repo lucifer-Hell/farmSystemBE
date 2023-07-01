@@ -1,5 +1,5 @@
 package com.farmSystemBE.farmSystemBE.constants;
 
 public enum EmploymentStatus {
-    EMPLOYEED,RESIGNED
+    EMPLOYEED,RESIGNED,ONBOARDING_PENDING
 }

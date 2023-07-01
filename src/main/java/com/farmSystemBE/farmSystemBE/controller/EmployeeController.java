@@ -1,17 +1,37 @@
 package com.farmSystemBE.farmSystemBE.controller;
 
+import com.farmSystemBE.farmSystemBE.DTO.EmployeeDto;
 import com.farmSystemBE.farmSystemBE.entity.Employee;
+import com.farmSystemBE.farmSystemBE.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
+    @Autowired
+    EmployeeService employeeService;
+    // GET EMPLOYEE DETAILS
+    @GetMapping
+    EmployeeDto getEmployeeDetails(@RequestParam("empId") long employeeId){
+      return employeeService.getEmployeeDetails(employeeId);
+    }
+
+
+    // ADD EMPLOYEE
     @PostMapping
-    ResponseEntity<String> addEmployee(Employee employee){
+    ResponseEntity<String> addEmployee(@RequestBody EmployeeDto employee){
+        employeeService.addEmployee(employee);
         return ResponseEntity.ok("Employee added sucesfully");
+    }
+
+    @PutMapping
+    EmployeeDto updateEmployeeDetails(@RequestParam("empId") long empId,@RequestBody EmployeeDto employeeDto){
+        return employeeService.updateEmployee(empId,employeeDto);
+    }
+    @DeleteMapping
+    void deleteEmployee(@RequestParam("empId") long empId){
+        employeeService.deleteEmployeeById(empId);
     }
 }
