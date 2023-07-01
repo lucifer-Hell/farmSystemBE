@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.*;
 public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
+
     // GET EMPLOYEE DETAILS
     @GetMapping
     EmployeeDto getEmployeeDetails(@RequestParam("empId") long employeeId){
       return employeeService.getEmployeeDetails(employeeId);
     }
-
 
     // ADD EMPLOYEE
     @PostMapping
@@ -26,10 +26,13 @@ public class EmployeeController {
         return ResponseEntity.ok("Employee added sucesfully");
     }
 
+    // UPDATE EMPLOYEE DETAIL
     @PutMapping
     EmployeeDto updateEmployeeDetails(@RequestParam("empId") long empId,@RequestBody EmployeeDto employeeDto){
         return employeeService.updateEmployee(empId,employeeDto);
     }
+
+    // DELETE EMPLOYEE DETAIL
     @DeleteMapping
     void deleteEmployee(@RequestParam("empId") long empId){
         employeeService.deleteEmployeeById(empId);
