@@ -12,7 +12,7 @@ public interface AttendenceRepo extends CrudRepository<Attendence,Long> {
 
     public List<Attendence> findByDate(LocalDate date);
     public List<Attendence> findByEmployeeId(long id);
-    public Attendence findByEmployeeIdAndDateAndShift(long id , LocalDate date, Shift shift);
+    public List<Attendence> findByEmployeeIdAndDate(long id , LocalDate date);
 
     public void deleteAttendenceByDate(LocalDate date);
 }

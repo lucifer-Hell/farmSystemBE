@@ -6,12 +6,13 @@ import lombok.Data;
 import lombok.NonNull;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 @Data
 public class AttendenceDto {
     long employeeId;
     @NonNull
-    Date date;
+    LocalDate date;
     @NonNull
     Shift shift;
 }

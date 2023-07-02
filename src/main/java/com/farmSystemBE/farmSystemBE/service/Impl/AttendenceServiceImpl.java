@@ -6,8 +6,8 @@ import com.farmSystemBE.farmSystemBE.repository.AttendenceRepo;
 import com.farmSystemBE.farmSystemBE.service.AttendenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -37,5 +37,12 @@ public class AttendenceServiceImpl implements AttendenceService {
                 }).forEach(attendence -> {
                     attendenceRepo.save(attendence);
                 });
+    }
+
+    @Override
+    public List<AttendenceDto> getAttendenceDetailByEmployeeIdAndDate(long employeeId, LocalDate date) {
+        return attendenceRepo.findByEmployeeIdAndDate(employeeId,date)
+                .stream().map(attendence ->attendenceMapper.attendenceToAttendenceDto(attendence))
+                .collect(Collectors.toList());
     }
 }
