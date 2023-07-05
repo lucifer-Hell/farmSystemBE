@@ -16,7 +16,7 @@ import java.util.List;
 public class AttendenceController {
     @Autowired
     AttendenceService attendenceService;
-    @PostMapping("/updateInBulk")
+    @PutMapping("/updateInBulk")
     ResponseEntity<String> updateAttendenceInBulk(@RequestParam("date")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, @RequestBody List<EmployeeShiftDto> employeeShiftList){
         attendenceService.updateAttendenceInBulk(date, employeeShiftList);
         return ResponseEntity.ok("attendence marked");

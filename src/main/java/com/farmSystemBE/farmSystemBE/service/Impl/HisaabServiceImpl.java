@@ -1,10 +1,8 @@
 package com.farmSystemBE.farmSystemBE.service.Impl;
 
-import com.farmSystemBE.farmSystemBE.DTO.AttendenceDto;
-import com.farmSystemBE.farmSystemBE.DTO.DateWithShiftsDto;
-import com.farmSystemBE.farmSystemBE.DTO.PaymentReportDto;
-import com.farmSystemBE.farmSystemBE.DTO.PaymentReportRowDto;
+import com.farmSystemBE.farmSystemBE.DTO.*;
 import com.farmSystemBE.farmSystemBE.constants.Shift;
+import com.farmSystemBE.farmSystemBE.entity.Employee;
 import com.farmSystemBE.farmSystemBE.service.AttendenceService;
 import com.farmSystemBE.farmSystemBE.service.EmployeeService;
 import com.farmSystemBE.farmSystemBE.service.HisaabService;
@@ -29,7 +27,7 @@ public class HisaabServiceImpl implements HisaabService {
         Set<Long> employeeIds= findEmployeePresentInDateRange(fromDate,toDate);
         // for each employee find data generate data related to its payment
         List<PaymentReportRowDto> paymentReportRows= employeeIds.stream().map(id -> {
-            double employeeSalary=employeeService.getEmployeeDetails(id).getSalary();
+            EmployeeDto employee=employeeService.getEmployeeDetails(id);
             Map<LocalDate, Set<Shift>> dateShiftMap=new HashMap<>();
             fromDate.datesUntil(toDate.plusDays(1)).forEach(date -> {
                 List<AttendenceDto> attendenceDtos=attendenceService.getAttendenceDetailByEmployeeIdAndDate(id,date);
@@ -46,8 +44,9 @@ public class HisaabServiceImpl implements HisaabService {
             });
             return PaymentReportRowDto.builder()
                     .employeeId(id)
+                    .employeeName(employee.getFirstName()+" "+employee.getLastName())
                     .dateShiftMap(dateShiftMap)
-                    .totalWage(employeeSalary*getTotalShifts(dateShiftMap))
+                    .totalWage(employee.getSalary()*getTotalShifts(dateShiftMap))
                     .build();
         }).toList();
         return PaymentReportDto.builder()
