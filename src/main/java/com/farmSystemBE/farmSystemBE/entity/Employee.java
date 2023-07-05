@@ -8,16 +8,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
+import org.springframework.data.annotation.PersistenceConstructor;
 
 import java.util.UUID;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

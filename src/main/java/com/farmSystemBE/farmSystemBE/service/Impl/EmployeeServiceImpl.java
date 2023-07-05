@@ -44,7 +44,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDto getEmployeeDetails(long employeeId) {
-        log.info("employee details found");
-        return new EmployeeDto();
+        return employeeMapper.employeeToEmployeeDto(
+                employeeRepository.findEmployeeByEmployeeId(employeeId)
+        );
     }
 }

@@ -6,25 +6,21 @@ import com.farmSystemBE.farmSystemBE.constants.Gender;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class EmployeeDto {
-    @NonNull
+    @NonNull @NotBlank
     String firstName;
-    @NonNull
+    @NonNull @NotBlank
     String lastName;
     String mobileNumber;
-    @NonNull
+    @NonNull @NotBlank
     Gender gender;
     double salary;
-    @NonNull
+    @NonNull @NotBlank
     EmployeeType emplyoeeType;
-    @NonNull
+    @NonNull @NotBlank
     EmploymentStatus employmentStatus;
 }
