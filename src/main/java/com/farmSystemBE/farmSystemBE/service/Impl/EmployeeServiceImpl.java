@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.net.HttpRetryException;
+
 @Service
 @Slf4j
 public class EmployeeServiceImpl implements EmployeeService {
@@ -17,7 +19,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     EmployeeMapper employeeMapper;
     @Override
-    public void addEmployee(EmployeeDto employeeDto) {
+    public void addEmployee(EmployeeDto employeeDto) throws HttpRetryException {
+        if(!employeeRepository.findEmployeesByName(employeeDto.getFirstName(),
+                employeeDto.getLastName()).isEmpty())
+            throw new HttpRetryException("Employee name already exists try with another employee name ",400);
         Employee employee=employeeMapper.employeeDtoToEmployee(employeeDto);
         employeeRepository.save(employee);
         log.info("employee added sucessfully");

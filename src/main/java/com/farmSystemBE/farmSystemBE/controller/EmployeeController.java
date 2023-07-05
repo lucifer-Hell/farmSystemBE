@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.HttpRetryException;
+
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
@@ -20,7 +22,7 @@ public class EmployeeController {
 
     // ADD EMPLOYEE
     @PostMapping
-    ResponseEntity<String> addEmployee(@RequestBody EmployeeDto employee){
+    ResponseEntity<String> addEmployee(@RequestBody EmployeeDto employee) throws HttpRetryException {
         employeeService.addEmployee(employee);
         return ResponseEntity.ok("Employee added sucesfully");
     }

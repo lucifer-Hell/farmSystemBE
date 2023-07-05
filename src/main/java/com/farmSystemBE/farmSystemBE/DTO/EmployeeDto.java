@@ -6,14 +6,18 @@ import com.farmSystemBE.farmSystemBE.constants.Gender;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class EmployeeDto {
+    @NonNull
     String firstName;
+    @NonNull
     String lastName;
     String mobileNumber;
     @NonNull

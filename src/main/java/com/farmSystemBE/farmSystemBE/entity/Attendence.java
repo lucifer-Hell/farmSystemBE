@@ -6,12 +6,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Attendence {
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Id
     long id;
     @Nonnull
@@ -19,5 +23,5 @@ public class Attendence {
     @Nonnull
     Date date;
     @Nonnull
-    Shift shift;
+    String shift;
 }
