@@ -1,6 +1,7 @@
 package com.farmSystemBE.farmSystemBE.service.Impl;
 
 import com.farmSystemBE.farmSystemBE.DTO.AttendenceDto;
+import com.farmSystemBE.farmSystemBE.DTO.EmployeeShiftDto;
 import com.farmSystemBE.farmSystemBE.mapper.AttendenceMapper;
 import com.farmSystemBE.farmSystemBE.repository.AttendenceRepo;
 import com.farmSystemBE.farmSystemBE.service.AttendenceService;
@@ -31,19 +32,23 @@ public class AttendenceServiceImpl implements AttendenceService {
     }
 
     @Override
-    public void markAttendence(LocalDate date, List<AttendenceDto> attendenceDtoList) {
-        // delete old attendence
-        attendenceRepo.deleteAttendenceByDate(date);
-        // add new attendence
-        attendenceDtoList.stream()
-                .filter(attendenceDto -> {
-                    return employeeService.getEmployeeDetails(attendenceDto.getEmployeeId())!=null;
-                })
-                .map(attendenceDto -> {
-                    return attendenceMapper.attendenceDtoToAttendence(attendenceDto);
-                }).forEach(attendence -> {
-                    attendenceRepo.save(attendence);
+    public void updateAttendenceInBulk(LocalDate date, List<EmployeeShiftDto> employeeShiftList) {
+        employeeShiftList
+                .forEach(employeeShiftDto -> {
+                    markAttendence(new AttendenceDto(employeeShiftDto.getEmployeeId(),date,employeeShiftDto.getShift()));
                 });
+    }
+
+    @Override
+    public void markAttendence(AttendenceDto attendenceDto) {
+        // delete old attendence
+        attendenceRepo.deleteAttendenceByDateAndEmployeeId(attendenceDto.getDate(),attendenceDto.getEmployeeId());
+        // add new attendence
+        if(employeeService.getEmployeeDetails(attendenceDto.getEmployeeId())==null){
+            // TODO throw service exception
+        }else {
+            attendenceRepo.save(attendenceMapper.attendenceDtoToAttendence(attendenceDto));
+        }
     }
 
     @Override
