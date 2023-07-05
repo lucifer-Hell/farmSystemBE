@@ -1,7 +1,6 @@
 package com.farmSystemBE.farmSystemBE.controller;
 
 import com.farmSystemBE.farmSystemBE.DTO.EmployeeDto;
-import com.farmSystemBE.farmSystemBE.entity.Employee;
 import com.farmSystemBE.farmSystemBE.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

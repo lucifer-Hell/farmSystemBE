@@ -1,18 +1,16 @@
+version: '3.8'
 services:
-  mongodb:
-    image: 'mongo:latest'
-    environment:
-      - 'MONGO_INITDB_DATABASE=mydatabase'
-      - 'MONGO_INITDB_ROOT_PASSWORD=secret'
-      - 'MONGO_INITDB_ROOT_USERNAME=root'
-    ports:
-      - '27017'
   mysql:
-    image: 'mysql:latest'
+    image: mysql:latest
     environment:
-      - 'MYSQL_DATABASE=mydatabase'
-      - 'MYSQL_PASSWORD=secret'
-      - 'MYSQL_ROOT_PASSWORD=verysecret'
-      - 'MYSQL_USER=myuser'
+      - MYSQL_DATABASE=farm
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_USER=test
     ports:
-      - '3306'
+      - "3310:3306"
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8777:8080"

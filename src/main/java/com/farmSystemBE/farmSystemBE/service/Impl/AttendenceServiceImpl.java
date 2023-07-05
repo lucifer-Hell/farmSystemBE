@@ -5,13 +5,14 @@ import com.farmSystemBE.farmSystemBE.mapper.AttendenceMapper;
 import com.farmSystemBE.farmSystemBE.repository.AttendenceRepo;
 import com.farmSystemBE.farmSystemBE.service.AttendenceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
+@Service
 public class AttendenceServiceImpl implements AttendenceService {
     @Autowired
     AttendenceRepo attendenceRepo;

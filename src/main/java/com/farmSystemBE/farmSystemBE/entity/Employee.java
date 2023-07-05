@@ -24,10 +24,10 @@ public class Employee {
     String lastName;
     String mobileNumber;
     @Nonnull
-    Gender gender;
+    String gender;
     double salary;
     @Nonnull
-    EmployeeType emplyoeeType;
+    String emplyoeeType;
     @NonNull
-    EmploymentStatus employmentStatus;
+    String employmentStatus;
 }
