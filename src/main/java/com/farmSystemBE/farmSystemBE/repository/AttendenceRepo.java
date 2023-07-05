@@ -12,9 +12,10 @@ import java.util.List;
 
 public interface AttendenceRepo extends CrudRepository<Attendence,Long> {
 
-    @Query(value = "select * from date where date = ?1",nativeQuery = true)
+    @Query(value = "select * from attendence where date = ?1",nativeQuery = true)
     public List<Attendence> findByDate(LocalDate date);
     public List<Attendence> findByEmployeeId(long id);
+    @Query(value = "select * from attendence where id = ?1 and date = ?2",nativeQuery = true)
     public List<Attendence> findByEmployeeIdAndDate(long id , LocalDate date);
 
     @Transactional

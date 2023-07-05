@@ -16,13 +16,13 @@ import java.util.List;
 public class AttendenceController {
     @Autowired
     AttendenceService attendenceService;
-    @PostMapping("/update")
+    @PostMapping("/updateInBulk")
     ResponseEntity<String> updateAttendenceInBulk(@RequestParam("date")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, @RequestBody List<EmployeeShiftDto> employeeShiftList){
         attendenceService.updateAttendenceInBulk(date, employeeShiftList);
         return ResponseEntity.ok("attendence marked");
     }
-
-    List<AttendenceDto> getAttendenceDetail(LocalDate date){
+    @GetMapping
+    List<AttendenceDto> getAttendenceDetail(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date){
         return attendenceService.getAttendenceDetailByDate(date);
     }
 }
