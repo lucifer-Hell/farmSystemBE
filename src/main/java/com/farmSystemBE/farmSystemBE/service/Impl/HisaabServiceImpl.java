@@ -8,12 +8,15 @@ import com.farmSystemBE.farmSystemBE.constants.Shift;
 import com.farmSystemBE.farmSystemBE.service.AttendenceService;
 import com.farmSystemBE.farmSystemBE.service.EmployeeService;
 import com.farmSystemBE.farmSystemBE.service.HisaabService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.*;
-
+@Service
+@Slf4j
 public class HisaabServiceImpl implements HisaabService {
     @Autowired
     AttendenceService attendenceService;
@@ -28,7 +31,7 @@ public class HisaabServiceImpl implements HisaabService {
         List<PaymentReportRowDto> paymentReportRows= employeeIds.stream().map(id -> {
             double employeeSalary=employeeService.getEmployeeDetails(id).getSalary();
             Map<LocalDate, Set<Shift>> dateShiftMap=new HashMap<>();
-            fromDate.datesUntil(toDate).forEach(date -> {
+            fromDate.datesUntil(toDate.plusDays(1)).forEach(date -> {
                 List<AttendenceDto> attendenceDtos=attendenceService.getAttendenceDetailByEmployeeIdAndDate(id,date);
                 // generate dateShift map
                 attendenceDtos.forEach(attendenceDto ->{
@@ -64,7 +67,8 @@ public class HisaabServiceImpl implements HisaabService {
 
     private Set<Long> findEmployeePresentInDateRange(LocalDate fromDate, LocalDate toDate) {
         Set<Long> employeeIds=new HashSet<>();
-        fromDate.datesUntil(toDate).forEach(date -> {
+        fromDate.datesUntil(toDate.plusDays(1)).forEach(date -> {
+            log.info("curr date "+toDate);
             attendenceService.getAttendenceDetailByDate(date).forEach(attendenceDto -> {
                         employeeIds.add(attendenceDto.getEmployeeId());
                     });
