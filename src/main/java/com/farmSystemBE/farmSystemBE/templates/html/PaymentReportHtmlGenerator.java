@@ -14,7 +14,7 @@ import java.util.Set;
 public class PaymentReportHtmlGenerator {
     public String generateHtmlTemplate(PaymentReportDto paymentReportDto){
         /* String generated using https://www.textfixer.com/html/compress-html-compression.php */
-        String htmlString = "<!DOCTYPE html><head> <title>Payment Report</title> <style> @page { size: Wpx 1px;}* { page-break-inside: always; } table { border-collapse: collapse; width: 100%; } th, td { padding: 8px; text-align: center; border: 1px solid #000; } th { background-color: #f2f2f2; } tbody tr:nth-child(even) { background-color: #f9f9f9; } tbody tr:hover { background-color: #eaf2ff; } </style></head><body> <table border=\"3\">" +
+        String htmlString = "<!DOCTYPE html><head> <title>Payment Report</title> <style>table { border-collapse: collapse; width: 80%; } th, td { padding: 8px; text-align: center; border: 1px solid #000; } th { background-color: #f2f2f2; } tbody tr:nth-child(even) { background-color: #f9f9f9; } tbody tr:hover { background-color: #eaf2ff; } </style></head><body> <table border=\"3\">" +
                 generateTableHeading(paymentReportDto) +
                 generateRecordRows(paymentReportDto) +
                 "</table></body></html>";
