@@ -7,6 +7,8 @@ import org.xhtmlrenderer.layout.SharedContext;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 @Component
 public class HtmlToPdfUtil {
@@ -20,10 +22,8 @@ public class HtmlToPdfUtil {
             renderer.setDocumentFromString(document.html());
             renderer.layout();
             renderer.createPDF(outputStream);
-            File file=new File("./payment-report.pdf");
-            byte[] data=new byte[(int) file.length()];
-            outputStream.write(data);
-            return data;
+//            File file=new File("payment-report.pdf");
+            return Files.readAllBytes(Path.of("payment-report.pdf"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
