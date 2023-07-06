@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/payment")
 public class PaymentController {
     @Autowired

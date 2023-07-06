@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.HttpRetryException;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/employee")
 public class EmployeeController {
     @Autowired
