@@ -11,6 +11,7 @@ import lombok.*;
 
 @Data
 public class EmployeeDto {
+    long id;
     @NonNull @NotBlank
     String firstName;
     @NonNull @NotBlank

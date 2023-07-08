@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.net.HttpRetryException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -47,5 +49,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeMapper.employeeToEmployeeDto(
                 employeeRepository.findEmployeeByEmployeeId(employeeId)
         );
+    }
+
+    @Override
+    public List<EmployeeDto> getAllEmployeeDetails() {
+        return employeeRepository.getAllEmployeeDetails()
+                .stream().map(employee -> employeeMapper.employeeToEmployeeDto(employee))
+                .collect(Collectors.toList());
     }
 }

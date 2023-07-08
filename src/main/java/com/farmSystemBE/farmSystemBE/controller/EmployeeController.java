@@ -1,12 +1,14 @@
 package com.farmSystemBE.farmSystemBE.controller;
 
 import com.farmSystemBE.farmSystemBE.DTO.EmployeeDto;
+import com.farmSystemBE.farmSystemBE.entity.Employee;
 import com.farmSystemBE.farmSystemBE.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.HttpRetryException;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -17,8 +19,12 @@ public class EmployeeController {
 
     // GET EMPLOYEE DETAILS
     @GetMapping
-    EmployeeDto getEmployeeDetails(@RequestParam("empId") long employeeId){
+    EmployeeDto getEmployeeDetails(@RequestParam("employeeId") long employeeId){
       return employeeService.getEmployeeDetails(employeeId);
+    }
+    @GetMapping("/allEmployeeDetails")
+    List<EmployeeDto> getAllEmployeeDetails(){
+        return employeeService.getAllEmployeeDetails();
     }
 
     // ADD EMPLOYEE
