@@ -1,5 +1,6 @@
 package com.farmSystemBE.farmSystemBE.DTO;
 
+import com.farmSystemBE.farmSystemBE.constants.Gender;
 import com.farmSystemBE.farmSystemBE.constants.Shift;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class PaymentReportRowDto {
     long employeeId;
+    Gender gender;
     String employeeName;
     Map<LocalDate, Set<Shift>> dateShiftMap;
     double totalWage;

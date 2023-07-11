@@ -44,6 +44,7 @@ public class HisaabServiceImpl implements HisaabService {
             });
             return PaymentReportRowDto.builder()
                     .employeeId(id)
+                    .gender(employee.getGender())
                     .employeeName(employee.getFirstName()+" "+employee.getLastName())
                     .dateShiftMap(dateShiftMap)
                     .totalWage(employee.getSalary()*getTotalShifts(dateShiftMap))
